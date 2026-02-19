@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ✅ Keep your theme tokens */
+:root {
+  --font-size: 16px;
+
+  --background: #ffffff;
+  --foreground: #23262b;
+
+  --card: #ffffff;
+  --card-foreground: #23262b;
+
+  --popover: #ffffff;
+  --popover-foreground: #23262b;
+
+  --primary: #030213;
+  --primary-foreground: #ffffff;
+
+  --secondary: #f3f4f6;
+  --secondary-foreground: #030213;
+
+  --muted: #ececf0;
+  --muted-foreground: #717182;
+
+  --accent: #e9ebef;
+  --accent-foreground: #030213;
+
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+
+  --border: rgba(0, 0, 0, 0.1);
+  --input: transparent;
+  --input-background: #f3f3f5;
+  --switch-background: #cbced4;
+
+  --ring: rgba(0, 0, 0, 0.25);
+  --radius: 0.625rem;
+
+  /* ✅ Your FieldSignal brand (add these so we can use them everywhere) */
+  --teal: 15 185 177; /* #0fb9b1 */
+  --pink: 230 73 128; /* #e64980 */
+  --blue: 59 130 246; /* #3b82f6 */
+}
+
+/* ✅ Dark mode tokens (works with Tailwind darkMode: "class") */
+.dark {
+  --background: #0f1115;
+  --foreground: #fafaf7;
+
+  --card: #0f1115;
+  --card-foreground: #fafaf7;
+
+  --popover: #0f1115;
+  --popover-foreground: #fafaf7;
+
+  --primary: #fafaf7;
+  --primary-foreground: #0f1115;
+
+  --secondary: #1b1f27;
+  --secondary-foreground: #fafaf7;
+
+  --muted: #1b1f27;
+  --muted-foreground: #a1a1aa;
+
+  --accent: #1b1f27;
+  --accent-foreground: #fafaf7;
+
+  --destructive: #d4183d;
+  --destructive-foreground: #ffffff;
+
+  --border: rgba(255, 255, 255, 0.12);
+  --input-background: #151923;
+
+  --ring: rgba(255, 255, 255, 0.25);
+}
+
+/* ✅ Base */
+html {
+  font-size: var(--font-size);
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ✅ Border default (replaces @apply border-border) */
+* {
+  border-color: var(--border);
+}
