@@ -91,7 +91,9 @@ export const Services = () => {
                   window.dispatchEvent(new PopStateEvent("popstate"));
                 }
               }}
-              className={`p-8 rounded-xl border border-gray-100 bg-white/50 hover:bg-white hover:shadow-sm transition-all duration-300 group ${service.title === "AI Readiness" ? "cursor-pointer" : ""}`}
+              className={`p-8 rounded-xl border border-gray-100 bg-white/50 hover:bg-white hover:shadow-sm transition-all duration-300 group ${service.title === "AI Readiness" || service.title === "AI Enablement"
+                ? "cursor-pointer"
+                : ""}`}
             >
               <div className="w-12 h-12 rounded-lg bg-white border border-gray-100 flex items-center justify-center mb-6 group-hover:border-[#14B8A6]/30 group-hover:text-[#14B8A6] transition-colors shadow-sm">
                 <service.icon className="w-6 h-6" />

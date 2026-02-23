@@ -31,6 +31,7 @@ import ApproachPage from "./Approach";
 import CompanyPage from "./Company";
 import ServicesPage from "./Services";
 import AIReadinessPage from "./AIReadiness";
+import AIEnablementPage from "./AIEnablement";
 import CaseStudiesPage from "./CaseStudies";
 import ResourcesPage from "./Resources";
 import InsightsPage from "./Insights";
@@ -66,6 +67,10 @@ export default function App() {
 
   if (currentPath === "/services/ai-readiness") {
     return <AIReadinessPage />;
+  }
+
+  if (currentPath === "/services/ai-enablement") {
+    return <AIEnablementPage />;
   }
 
   if (currentPath === "/case-studies") {

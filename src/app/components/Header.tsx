@@ -23,7 +23,15 @@ export const Header = () => {
   }, []);
 
   const navItems = [
-    { label: "Services", href: "/services" },
+    {
+      label: "Services",
+      href: "/services",
+      children: [
+        { label: "Services Overview", href: "/services" },
+        { label: "AI Readiness", href: "/services/ai-readiness" },
+        { label: "AI Enablement", href: "/services/ai-enablement" },
+      ],
+    },
     { label: "Approach", href: "/approach" },
     { label: "Case Studies", href: "/case-studies" },
     { label: "Insights", href: "/insights" },
@@ -57,19 +65,60 @@ export const Header = () => {
           </a>
           
           <nav className="hidden lg:flex items-center gap-8">
-            {navItems.map((item) => (
-              <a 
-                key={item.label} 
-                href={item.href}
-                onClick={(e) => handleNavClick(e, item.href)}
-                className={`text-sm font-medium transition-colors ${
-                  activePath === item.href ? "text-[#14B8A6]" : "text-[#6B7280] hover:text-[#1F2328]"
-                }`}
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
+  {navItems.map((item) => {
+    const isActive =
+      activePath === item.href ||
+      (item.children?.some((c) => c.href === activePath) ?? false);
+
+    if (item.children?.length) {
+      return (
+        <div key={item.label} className="relative group">
+          <a
+            href={item.href}
+            onClick={(e) => handleNavClick(e, item.href)}
+            className={`text-sm font-medium transition-colors ${
+              isActive ? "text-[#14B8A6]" : "text-[#6B7280] hover:text-[#1F2328]"
+            }`}
+          >
+            {item.label}
+          </a>
+
+          <div className="absolute left-0 top-full pt-3 opacity-0 translate-y-1 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-150">
+            <div className="w-64 rounded-xl border border-gray-100 bg-white shadow-lg p-2">
+              {item.children.map((child) => (
+                <a
+                  key={child.href}
+                  href={child.href}
+                  onClick={(e) => handleNavClick(e, child.href)}
+                  className={`block rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
+                    activePath === child.href
+                      ? "bg-[#14B8A6]/10 text-[#14B8A6]"
+                      : "text-[#1F2328] hover:bg-gray-50"
+                  }`}
+                >
+                  {child.label}
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    return (
+      <a
+        key={item.label}
+        href={item.href}
+        onClick={(e) => handleNavClick(e, item.href)}
+        className={`text-sm font-medium transition-colors ${
+          isActive ? "text-[#14B8A6]" : "text-[#6B7280] hover:text-[#1F2328]"
+        }`}
+      >
+        {item.label}
+      </a>
+    );
+  })}
+</nav>
         </div>
 
         <div className="hidden lg:flex items-center gap-4">
@@ -99,16 +148,32 @@ export const Header = () => {
             className="absolute top-full left-0 right-0 bg-white border-b border-gray-100 p-6 lg:hidden"
           >
             <nav className="flex flex-col gap-6">
-              {navItems.map((item) => (
-                <a 
-                  key={item.label} 
-                  href={item.href}
-                  className="text-lg font-medium text-[#1F2328]"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
-              ))}
+            {navItems.map((item) => (
+  <div key={item.label} className="flex flex-col gap-2">
+    <a
+      href={item.href}
+      className="text-lg font-medium text-[#1F2328]"
+      onClick={(e) => handleNavClick(e as any, item.href)}
+    >
+      {item.label}
+    </a>
+
+    {item.children?.length ? (
+      <div className="pl-4 flex flex-col gap-2">
+        {item.children.map((child) => (
+          <a
+            key={child.href}
+            href={child.href}
+            className="text-sm font-medium text-[#6B7280]"
+            onClick={(e) => handleNavClick(e as any, child.href)}
+          >
+            {child.label}
+          </a>
+        ))}
+      </div>
+    ) : null}
+  </div>
+))}
               <div className="pt-6 border-t border-gray-100 flex flex-col gap-4">
                 <button className="w-full py-4 text-center font-bold text-[#1F2328] border border-gray-200 rounded-lg">
                   Book a Call

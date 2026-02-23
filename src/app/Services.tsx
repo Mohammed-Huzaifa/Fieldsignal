@@ -389,8 +389,13 @@ export default function ServicesPage() {
                       </p>
                       <button 
                         onClick={() => {
-                          if (service.id === "readiness") {
+                          if (service.title === "AI Readiness") {
                             window.history.pushState({}, "", "/services/ai-readiness");
+                            window.dispatchEvent(new PopStateEvent("popstate"));
+                          }
+                        
+                          if (service.title === "AI Enablement") {
+                            window.history.pushState({}, "", "/services/ai-enablement");
                             window.dispatchEvent(new PopStateEvent("popstate"));
                           }
                         }}
