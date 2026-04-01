@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 import { motion } from "motion/react";
 import { 
@@ -20,6 +18,7 @@ import {
   FileText,
   MessageSquare
 } from "lucide-react";
+
 import { Header } from "./components/Header";
 import { Hero } from "./components/Hero";
 import { Framework } from "./components/Framework";
@@ -27,31 +26,43 @@ import { Services } from "./components/Services";
 import { LeadMagnet } from "./components/LeadMagnet";
 import { Footer } from "./components/Footer";
 import { ImageWithFallback } from "./components/figma/ImageWithFallback";
+
 import ApproachPage from "./Approach";
 import CompanyPage from "./Company";
 import ServicesPage from "./Services";
+
 import AIReadinessPage from "./AIReadiness";
 import AIEnablementPage from "./AIEnablement";
+import AITrainingPage from "./AITraining";
+
+// ⚠️ FIXED (match your file name exactly)
+import AILeadershipPage from "./AILeaderShip";
+
+import AIKnowledgeStackPage from "./AIKnowledgeStack";
+import AIAgentsPage from "./AIAgents";
+import AIGovernancePage from "./AIGovernance";
+import AIMaintenancePage from "./AIMaintenance";
+import AIContentEnginePage from "./AIContentEngine";
+
 import CaseStudiesPage from "./CaseStudies";
-import ResourcesPage from "./Resources";
 import InsightsPage from "./Insights";
+import ResourcesPage from "./Resources";
+
+import VisualAIPage from "./VisualAI";
+import AEOPage from "./AEO";
 
 export default function App() {
-  const [currentPath, setCurrentPath] = useState("/");
-
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
   useEffect(() => {
-    setCurrentPath(window.location.pathname);
-  
     const handlePopState = () => {
       setCurrentPath(window.location.pathname);
       window.scrollTo(0, 0);
     };
-  
+
     window.addEventListener("popstate", handlePopState);
     return () => window.removeEventListener("popstate", handlePopState);
   }, []);
-  
 
   if (currentPath === "/approach") {
     return <ApproachPage />;
@@ -73,6 +84,42 @@ export default function App() {
     return <AIEnablementPage />;
   }
 
+  if (currentPath === "/services/ai-training") {
+    return <AITrainingPage />;
+  }
+
+  if (currentPath === "/services/ai-leadership") {
+    return <AILeadershipPage />;
+  }
+
+  if (currentPath === "/services/ai-knowledge-stack") {
+    return <AIKnowledgeStackPage />;
+  }
+
+  if (currentPath === "/services/ai-agents") {
+    return <AIAgentsPage />;
+  }
+
+  if (currentPath === "/services/ai-governance") {
+    return <AIGovernancePage />;
+  }
+
+  if (currentPath === "/services/ai-maintenance") {
+    return <AIMaintenancePage />;
+  }
+
+  if (currentPath === "/services/ai-content-engine") {
+    return <AIContentEnginePage />;
+  }
+
+  if (currentPath === "/services/visual-ai") {
+    return <VisualAIPage />;
+  }
+
+  if (currentPath === "/services/aeo") {
+    return <AEOPage />;
+  }
+
   if (currentPath === "/case-studies") {
     return <CaseStudiesPage />;
   }
@@ -80,7 +127,6 @@ export default function App() {
   if (currentPath === "/insights") {
     return <InsightsPage />;
   }
-
 
   if (currentPath === "/resources") {
     return <ResourcesPage />;
@@ -252,7 +298,13 @@ export default function App() {
                   Practical writing on AI enablement, governance, dataset foundations, agents, content systems, and answer engine optimization.
                 </p>
               </div>
-              <button className="flex items-center gap-2 font-semibold text-[#1F2328] border-b-2 border-[#14B8A6] pb-1 transition-colors hover:text-[#14B8A6]">
+              <button 
+                onClick={() => {
+                  window.history.pushState({}, "", "/insights");
+                  window.dispatchEvent(new PopStateEvent("popstate"));
+                }}
+                className="flex items-center gap-2 font-semibold text-[#1F2328] border-b-2 border-[#14B8A6] pb-1 transition-colors hover:text-[#14B8A6]"
+              >
                 Explore Insights <ArrowRight className="w-4 h-4" />
               </button>
             </div>
@@ -275,7 +327,14 @@ export default function App() {
                   readTime: "12 min read"
                 }
               ].map((post, i) => (
-                <div key={i} className="bg-white p-8 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer flex flex-col h-full">
+                <div 
+                  key={i} 
+                  onClick={() => {
+                    window.history.pushState({}, "", "/insights");
+                    window.dispatchEvent(new PopStateEvent("popstate"));
+                  }}
+                  className="bg-white p-8 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow cursor-pointer flex flex-col h-full"
+                >
                   <div className="flex items-center gap-3 text-xs text-[#6B7280] font-medium mb-6">
                     <span>{post.date}</span>
                     <span className="w-1 h-1 bg-gray-300 rounded-full"></span>
