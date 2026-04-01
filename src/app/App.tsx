@@ -52,17 +52,21 @@ import VisualAIPage from "./VisualAI";
 import AEOPage from "./AEO";
 
 export default function App() {
-  const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  const [currentPath, setCurrentPath] = useState("/");
 
-  useEffect(() => {
-    const handlePopState = () => {
-      setCurrentPath(window.location.pathname);
-      window.scrollTo(0, 0);
-    };
+  
 
-    window.addEventListener("popstate", handlePopState);
-    return () => window.removeEventListener("popstate", handlePopState);
-  }, []);
+useEffect(() => {
+  const handlePopState = () => {
+    setCurrentPath(window.location.pathname);
+    window.scrollTo(0, 0);
+  };
+
+  handlePopState();
+
+  window.addEventListener("popstate", handlePopState);
+  return () => window.removeEventListener("popstate", handlePopState);
+}, []);
 
   if (currentPath === "/approach") {
     return <ApproachPage />;
